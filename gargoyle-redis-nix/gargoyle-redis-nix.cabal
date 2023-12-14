@@ -1,0 +1,61 @@
+name:               gargoyle-redis-nix
+version:            0.3.0.1
+author:             Dave Laing
+maintainer:         dave.laing.80@gmail.com
+copyright:          Copyright (C) 2023 Dave Laing
+license:            BSD3
+license-file:       LICENSE
+build-type:         Simple
+cabal-version:      >=1.10
+synopsis:           Manage Redis servers with gargoyle and nix
+category:           System
+
+library
+  exposed-modules:  Gargoyle.Redis.Nix
+  other-modules:    Paths_gargoyle_redis_nix
+  ghc-options:      -Wall
+  ghc-prof-options: -fprof-auto-exported
+  build-depends:
+      base                 >=4.12 && <4.17
+    , bytestring           >=0.10 && <0.12
+    , gargoyle             >=0.1  && <0.2
+    , gargoyle-redis       >=0.2  && <0.3
+    , which                >=0.2  && <0.3
+
+  hs-source-dirs:   src
+  default-language: Haskell2010
+
+executable gargoyle-nix-redis-cli
+  main-is:          gargoyle-nix-redis-cli.hs
+  hs-source-dirs:   src-bin
+  ghc-options:      -Wall -threaded
+  ghc-prof-options: -fprof-auto-exported
+  default-language: Haskell2010
+  build-depends:
+      base
+    , gargoyle-redis
+    , gargoyle-redis-nix
+    , which
+
+executable gargoyle-nix-redis-run
+  main-is:          gargoyle-nix-redis-run.hs
+  hs-source-dirs:   src-bin
+  ghc-options:      -Wall -threaded
+  ghc-prof-options: -fprof-auto-exported
+  default-language: Haskell2010
+  build-depends:
+      base
+    , gargoyle
+    , gargoyle-redis
+    , gargoyle-redis-nix
+
+executable gargoyle-nix-redis-monitor
+  main-is:          gargoyle-nix-redis-monitor.hs
+  hs-source-dirs:   src-bin
+  ghc-options:      -Wall -threaded
+  ghc-prof-options: -fprof-auto-exported
+  default-language: Haskell2010
+  build-depends:
+      base
+    , gargoyle
+    , gargoyle-redis-nix

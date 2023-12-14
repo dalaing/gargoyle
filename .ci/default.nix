@@ -35,7 +35,10 @@ let
         gargoyle
         gargoyle-postgresql
         gargoyle-postgresql-nix
-        gargoyle-postgresql-connect;
+        gargoyle-postgresql-connect
+        gargoyle-redis
+        gargoyle-redis-nix
+        gargoyle-redis-connect;
     };
 in
   lib.mapAttrs (ghc: nixpkgs: lib.recurseIntoAttrs (build { inherit nixpkgs ghc; })) ghcs

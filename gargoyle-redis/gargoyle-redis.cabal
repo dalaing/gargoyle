@@ -1,0 +1,97 @@
+name:               gargoyle-redis
+version:            0.2.0.2
+license:            BSD3
+license-file:       LICENSE
+author:             Dave Laing
+maintainer:         dave.laing.80@gmail.com
+category:           Databases
+build-type:         Simple
+cabal-version:      >=1.10
+synopsis:           Manage Redis servers with gargoyle
+
+-- Requires postgres to be in the environment to run
+flag enable-redis-test
+  default: False
+  manual:  True
+
+library
+  exposed-modules:  Gargoyle.Redis
+  ghc-options:      -Wall
+  ghc-prof-options: -fprof-auto-exported
+  build-depends:
+      base          >=4.12  && <4.17
+    , bytestring    >=0.10  && <0.12
+    , directory     >=1.3   && <1.4
+    , filepath      >=1.4   && <1.5
+    , gargoyle      >=0.1.1.0 && < 0.2
+    , posix-escape  >=0.1   && <0.2
+    , process       >=1.5   && <1.7
+    , stringsearch  >=0.3   && <0.4
+    , text          >=1.2   && <1.3
+    , unix          >=2.7.2 && <2.8
+
+  hs-source-dirs:   src
+  default-language: Haskell2010
+
+executable gargoyle-redis-cli
+  main-is:          gargoyle-redis-cli.hs
+  hs-source-dirs:   src-bin
+  ghc-options:      -Wall -threaded
+  ghc-prof-options: -fprof-auto-exported
+  default-language: Haskell2010
+  build-depends:
+      base
+    , bytestring
+    , gargoyle
+    , gargoyle-redis
+    , process
+    , text
+    , unix
+
+executable gargoyle-redis-run
+  main-is:          gargoyle-redis-run.hs
+  hs-source-dirs:   src-bin
+  ghc-options:      -Wall -threaded
+  ghc-prof-options: -fprof-auto-exported
+  default-language: Haskell2010
+  build-depends:
+      base
+    , gargoyle
+    , gargoyle-redis
+
+executable gargoyle-redis-monitor
+  main-is:          gargoyle-redis-monitor.hs
+  hs-source-dirs:   src-bin
+  ghc-options:      -Wall -threaded
+  ghc-prof-options: -fprof-auto-exported
+  default-language: Haskell2010
+  build-depends:
+      base
+    , bytestring
+    , gargoyle
+    , gargoyle-redis
+    , process
+    , text
+
+test-suite gargoyle-redis-test
+  type:             exitcode-stdio-1.0
+  main-is:          gargoyle-redis-test.hs
+  ghc-options:      -Wall -threaded
+  ghc-prof-options: -fprof-auto-exported
+  hs-source-dirs:   tests
+  default-language: Haskell2010
+
+  if !flag(enable-redis-test)
+    buildable: False
+
+  else
+    build-depends:
+        base
+      , bytestring
+      , directory
+      , filepath
+      , gargoyle
+      , gargoyle-redis
+      , process
+      , text
+      , unix
