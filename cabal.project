@@ -3,3 +3,6 @@ packages:
     gargoyle-postgresql/
     gargoyle-postgresql-nix/
     gargoyle-postgresql-connect/
+    gargoyle-redis/
+    gargoyle-redis-nix/
+    gargoyle-redis-connect/

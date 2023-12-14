@@ -1,0 +1,5 @@
+packages:
+  ../gargoyle/
+  ../gargoyle-redis/
+  ../gargoyle-redis-nix/
+  ./
